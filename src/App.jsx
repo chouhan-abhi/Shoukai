@@ -17,7 +17,7 @@ const projects = [
   {
     title: "AnimeSkdool",
     description: "Anime streaming UI with fast search, character pages and stunning minimal design.",
-    demo: "https://skdool.surge.sh",
+    demo: "https://anime.dracket.art",
     repo: "https://github.com/chouhan-abhi/AnimeSkdool",
     tech: ["React", "Tailwind", "REST API"],
     image:
@@ -26,7 +26,7 @@ const projects = [
   {
     title: "DevKit",
     description: "A developer toolkit with utilities like JSON formatter, color picker and more.",
-    demo: "https://devkit.surge.sh",
+    demo: "https://devkit.dracket.art",
     repo: "https://github.com/chouhan-abhi/DevKit",
     tech: ["React", "Tailwind"],
     image:
@@ -35,7 +35,7 @@ const projects = [
   {
     title: "PitStop",
     description: "A clean and fast UI for tracking F1 pitstop stats and race insights.",
-    demo: "https://quickstop.surge.sh",
+    demo: "https://quickstop.dracket.art",
     repo: "https://github.com/chouhan-abhi/PitStop",
     tech: ["React", "Tailwind", "API"],
     image:
@@ -58,42 +58,54 @@ export default function App() {
       <SideNav />
       <div className="ml-0 md:ml-40 transition-all duration-300">
         {/* Make the inner content the snap container so each SectionWrapper is a direct child */}
-        <div className="relative z-10 flex flex-col items-center justify-center snap-container">
+        <div className="relative z-10 flex flex-col items-start snap-container">
 
           <Suspense fallback={<Loader />}>
                       {/* HERO */}
-                      <SectionWrapper id="hero">
-                        <Hero />
+                      <SectionWrapper>
+                        <section id="hero" className="section-wrapper">
+                          <Hero />
+                        </section>
                       </SectionWrapper>
             
                       {/* ABOUT */}
                       <SectionDivider />
-                      <SectionWrapper id="about" className="py-24">
-                        <About />
+                      <SectionWrapper>
+                        <section className="section-wrapper py-24">
+                          <About />
+                        </section>
                       </SectionWrapper>
             
                       {/* SKILLS */}
                       <SectionDivider />
-                      <SectionWrapper id="skills" className="py-24">
-                        <Skills />
+                      <SectionWrapper>
+                        <section className="section-wrapper py-24">
+                          <Skills />
+                        </section>
                       </SectionWrapper>
             
                       {/* PROJECTS */}
                       <SectionDivider />
-                      <SectionWrapper id="projects" className="py-24">
-                        <ProjectsSection projects={projects} />
+                      <SectionWrapper>
+                        <section className="section-wrapper py-24">
+                          <ProjectsSection projects={projects} />
+                        </section>
                       </SectionWrapper>
             
                       {/* PHOTOGRAPHY */}
                       <SectionDivider />
-                      <SectionWrapper id="photography" className="py-24">
-                        <PhotographySection />
+                      <SectionWrapper>
+                        <section className="section-wrapper py-24">
+                          <PhotographySection />
+                        </section>
                       </SectionWrapper>
             
                       {/* CONTACT */}
                       <SectionDivider />
-                      <SectionWrapper id="contact" className="py-24">
-                        <Contact />
+                      <SectionWrapper>
+                        <section className="section-wrapper py-24">
+                          <Contact />
+                        </section>
                       </SectionWrapper>
           </Suspense>
         </div>

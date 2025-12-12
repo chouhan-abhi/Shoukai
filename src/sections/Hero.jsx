@@ -1,6 +1,11 @@
+import React, { useEffect } from 'react';
 import { Github, Linkedin, Twitter } from "lucide-react";
 
 export default function Hero() {
+  useEffect(() => {
+    console.log('Hero mounted');
+  }, []);
+
   return (
     <div className="section overflow-hidden">
       <div className="section-wrapper flex flex-col h-screen md:flex-row items-center justify-between">
