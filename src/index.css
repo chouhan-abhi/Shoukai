@@ -1,0 +1,634 @@
+/* ===================================================== */
+/*                 Tailwind Base Import                  */
+/* ===================================================== */
+@import "tailwindcss";
+
+/* ===================================================== */
+/*                   Modern CSS Reset                    */
+/* ===================================================== */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Smooth scrolling for sections */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove ugly blue tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===================================================== */
+/*            ROOT VARIABLES: Colors & Tokens            */
+/* ===================================================== */
+
+:root {
+  /* Modern vibrant gradient colors */
+  --primary-color: #3b82f6;
+  --primary-light: #60a5fa;
+  --primary-dark: #1e40af;
+  --secondary-color: #8b5cf6;
+  --accent-color: #ec4899;
+  --accent-light: #f43f5e;
+
+  /* Spacing scale (used to increase breathing room) */
+  --space-xxs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-xxl: 6rem; /* increased from 4rem for more breathing room between sections */
+
+  /* Light theme - Enhanced */
+  --bg-color: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --panel-color: #ffffff;
+  --panel-hover: #f8f9fa;
+  --border-color: #cbd5e1;
+  --border-light: #e2e8f0;
+
+  /* Dark theme - Enhanced */
+  --bg-color-dark: #0f172a;
+  --bg-secondary-dark: #1e293b;
+  --panel-color-dark: #1e293b;
+  --panel-hover-dark: #334155;
+  --border-color-dark: #334155;
+  --border-light-dark: #475569;
+
+  /* Typography */
+  --text-color: #0f172a;
+  --text-secondary: #475569;
+  --text-color-dark: #f1f5f9;
+  --text-secondary-dark: #cbd5e1;
+  --font-family: "Inter", system-ui, sans-serif;
+
+  /* Shadows - Enhanced */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+
+  /* Glassmorphism opacity */
+  --glass-opacity: 0.3;
+  --glass-border: 0.15;
+}
+
+/* ===================================================== */
+/*                       THEMES                          */
+/* ===================================================== */
+
+.dark {
+  --bg-color: var(--bg-color-dark);
+  --bg-secondary: var(--bg-secondary-dark);
+  --text-color: var(--text-color-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --panel-color: var(--panel-color-dark);
+  --panel-hover: var(--panel-hover-dark);
+  --border-color: var(--border-color-dark);
+  --border-light: var(--border-light-dark);
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.75;
+}
+
+.dark body {
+  background: var(--bg-color-dark);
+  color: var(--text-color-dark);
+}
+
+/* ===================================================== */
+/*                Fluid Responsive Typography            */
+/* ===================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+}
+
+/* slightly smaller headings for better balance */
+h1 { font-size: clamp(1.75rem, 4.2vw, 3.2rem); }
+h2 { font-size: clamp(1.4rem, 3.2vw, 2.4rem); }
+h3 { font-size: clamp(1.05rem, 2.2vw, 1.6rem); }
+h4 { font-size: clamp(1rem, 2.2vw, 1.4rem); }
+
+p {
+  max-width: 72ch;
+  margin-bottom: var(--space-md);
+}
+
+/* ===================================================== */
+/*                     Scrollbars                        */
+/* ===================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c6c9d2;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3b4252;
+}
+
+/* ===================================================== */
+/*                     Animations                        */
+/* ===================================================== */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* moving window effect - slides up from bottom */
+@keyframes slideUpWindow {
+  from {
+    opacity: 0;
+    transform: translateY(100px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* section reveal on scroll with stagger */
+@keyframes revealSection {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp { animation: fadeInUp 0.5s ease-out forwards; }
+.animate-fadeIn   { animation: fadeIn 0.5s ease-out forwards; }
+.animate-slideIn  { animation: slideIn 0.5s ease-out forwards; }
+.animate-slideUpWindow { animation: slideUpWindow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+/* scroll-driven sections */
+.scroll-section {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.2, 1),
+              transform 0.9s cubic-bezier(0.2, 0.9, 0.2, 1);
+  /* make each observed section a snap target when inside the snap container */
+  scroll-snap-align: start;
+}
+
+.scroll-section.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Snap container helper - apply to the main scrollable element */
+.snap-container {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  height: 100vh; /* ensures the container is viewport tall for window-like snapping */
+  overflow-y: auto;
+}
+
+/* subtle focus when using anchor navigation */
+:target {
+  scroll-margin-top: 3.5rem;
+}
+
+/* ===================================================== */
+/*             Global Utility: Glow & Gradient           */
+/* ===================================================== */
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease-in-out infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 1.25rem;
+  padding: var(--space-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.15);
+  transform: translateY(-4px);
+}
+
+.dark .glass-card {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.dark .glass-card:hover {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 0 12px 32px rgba(96, 165, 250, 0.2);
+  transform: translateY(-4px);
+}
+
+/* ===================================================== */
+/*                 Section Spacing Token                 */
+/* ===================================================== */
+
+.section {
+  padding-top: var(--space-xxl);
+  padding-bottom: var(--space-xxl);
+  /* make sections align nicely when using scroll-snap */
+  scroll-snap-align: start;
+  /* give a reasonable minimum height so sections feel like "windows" */
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-top: calc(var(--space-xxl) + 2rem);
+    padding-bottom: calc(var(--space-xxl) + 2rem);
+  }
+}
+
+.section-wrapper {
+  width: 100%;
+  max-width: 1280px;
+  padding-left: 2rem; /* increased horizontal padding for breathing room */
+  padding-right: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Lists & content spacing */
+ul, ol {
+  margin: 0 0 var(--space-md) 0;
+  padding-left: 1.25rem;
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+/* Small helper spacing classes */
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+
+/* Utility to increase form/control spacing where needed */
+.form-row { margin-bottom: var(--space-md); }
+
+/* Utility classes for enhanced theming */
+
+/* Material Design 3 - Filled Button */
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+  color: white;
+  font-weight: 700;
+  padding: 0.875rem 1.75rem;
+  border-radius: 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4), 0 0 40px rgba(59, 130, 246, 0.2);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.5), 0 0 60px rgba(59, 130, 246, 0.35);
+  background: linear-gradient(135deg, #60a5fa 0%, #818cf8 50%, #a78bfa 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Material Design 3 - Outlined Button (Secondary) */
+.btn-secondary {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.08));
+  backdrop-filter: blur(10px);
+  color: #3b82f6;
+  font-weight: 700;
+  padding: 0.875rem 1.75rem;
+  border: 2px solid #3b82f6;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.25), transparent);
+  transition: left 0.5s;
+}
+
+.btn-secondary:hover::before {
+  left: 100%;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.15));
+  border-color: #6366f1;
+  color: #6366f1;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3), 0 0 30px rgba(59, 130, 246, 0.2);
+}
+
+.btn-secondary:active {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.12));
+}
+
+.dark .btn-secondary {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(167, 139, 250, 0.1));
+  color: #60a5fa;
+  border-color: #60a5fa;
+}
+
+.dark .btn-secondary:hover {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.25), rgba(167, 139, 250, 0.2));
+  border-color: #93c5fd;
+  color: #93c5fd;
+  box-shadow: 0 8px 24px rgba(96, 165, 250, 0.35), 0 0 30px rgba(96, 165, 250, 0.25);
+}
+
+/* Material Design 3 - Tonal Button (Tertiary) */
+.btn-tertiary {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.15));
+  color: #3b82f6;
+  font-weight: 700;
+  padding: 0.875rem 1.75rem;
+  border: none;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+}
+
+.btn-tertiary:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.25));
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+  color: #6366f1;
+}
+
+.btn-tertiary:active {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.2));
+}
+
+/* Icon button variant - Material Design 3 */
+.btn-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1));
+  color: #3b82f6;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+}
+
+.btn-icon:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.2));
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+  color: #6366f1;
+}
+
+.btn-icon:active {
+  transform: scale(0.95);
+}
+
+/* Material Design 3 - Elevated Card Variant */
+.card-elevated {
+  background: var(--panel-color);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 8px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-light);
+}
+
+.dark .card-elevated {
+  background: var(--panel-color-dark);
+  border-color: var(--border-light-dark);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Material Design 3 - Filled Card Variant */
+.card-filled {
+  background: var(--bg-secondary);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-filled:hover {
+  background: rgba(59, 130, 246, 0.05);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.dark .card-filled {
+  background: var(--bg-secondary-dark);
+}
+
+.dark .card-filled:hover {
+  background: rgba(96, 165, 250, 0.08);
+  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.15);
+}
+
+/* Material Design 3 - Outlined Card Variant */
+.card-outlined {
+  background: transparent;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  border: 1.5px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-outlined:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.dark .card-outlined {
+  border-color: var(--border-color-dark);
+}
+
+.dark .card-outlined:hover {
+  border-color: var(--primary-light);
+  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.15);
+}
+
+/* Material Ripple Effect for buttons */
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.btn-primary:active::after,
+.btn-secondary:active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out;
+}
+
+/* Elevation utility classes */
+.elevation-1 { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); }
+.elevation-2 { box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16); }
+.elevation-3 { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19); }
+.elevation-4 { box-shadow: 0 15px 25px rgba(0, 0, 0, 0.22); }
+
+.dark .elevation-1 { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); }
+.dark .elevation-2 { box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5); }
+.dark .elevation-3 { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6); }
+.dark .elevation-4 { box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7); }
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.dark .text-secondary {
+  color: var(--text-secondary-dark);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.dark .bg-secondary {
+  background-color: var(--bg-secondary-dark);
+}
+
+.border-subtle {
+  border-color: var(--border-light);
+}
+
+.dark .border-subtle {
+  border-color: var(--border-light-dark);
+}
+
+/* Enhanced link styles */
+a {
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+.dark a:hover {
+  color: var(--primary-light);
+}
+
+/* Input and form enhancements */
+input, textarea, select {
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.dark input:focus, .dark textarea:focus, .dark select:focus {
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
