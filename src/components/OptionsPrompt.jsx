@@ -42,10 +42,6 @@ export default function OptionsPrompt({
     };
   }, [question]);
 
-  const onSelect = (option) => {
-    window.location.href = `/portfolio#${option.toLowerCase().replace(/\s+/g, "-")}`;
-  };
-
   return (
     <div className="bg-[#0a0a0a] border border-green-500/30 rounded-xl p-6 max-w-4xl mx-auto font-mono text-green-400">
       {/* Question Line */}
@@ -60,7 +56,7 @@ export default function OptionsPrompt({
           {options.map((opt, idx) => (
             <button
               key={idx}
-              onClick={() => onSelect(opt)}
+              onClick={() => window.location.href = "/portfolio"}
               className="px-4 py-2 border border-green-500/50 rounded-md hover:bg-green-500/10 transition text-sm md:text-base"
             >
               {opt}
