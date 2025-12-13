@@ -1,5 +1,4 @@
-import OptionsPrompt from "./OptionsPrompt";
-import ProjectsSection from "./ProjectSection";
+import ProjectsSection from "./views/ProjectSection";
 
 export default function Launchpad() {
   return (
@@ -9,7 +8,6 @@ export default function Launchpad() {
         {/* LEFT PANEL — LAUNCHPAD */}
         <div className="space-y-16">
           <ProjectsSection />
-          <OptionsPrompt />
         </div>
       </div>
     </main>

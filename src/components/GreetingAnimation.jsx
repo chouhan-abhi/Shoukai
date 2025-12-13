@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CONFIG = {
   TYPING_SPEED_MIN: 30,
-  TYPING_SPEED_MAX: 100,
+  TYPING_SPEED_MAX: 80,
   LINE_DELAY: 400,
-  COUNTDOWN_DURATION: 5,
+  AUTO_REDIRECT_DELAY: 5000, // ms
 };
 
-// Dynamic greeting
 function getGreeting() {
   const hour = new Date().getHours();
   if (hour < 12) return "Good morning";
@@ -15,144 +15,199 @@ function getGreeting() {
   return "Good evening";
 }
 
-// Helper for random typing speed
-function randomTypingSpeed() {
+function randomSpeed() {
   return (
     CONFIG.TYPING_SPEED_MIN +
-    Math.floor(
-      Math.random() * (CONFIG.TYPING_SPEED_MAX - CONFIG.TYPING_SPEED_MIN),
-    )
+    Math.random() *
+      (CONFIG.TYPING_SPEED_MAX - CONFIG.TYPING_SPEED_MIN)
   );
 }
 
-export default function GreetingAnimation({ onFinish }) {
-  const greeting = getGreeting();
-  const lines = [
-    `> Hello User, ${greeting}!`,
-    "> Welcome to Dracket.art. We are glad you are here.",
-  ];
+export default function GreetingAnimation({ navigateTo = "/home" }) {
+  const navigate = useNavigate();
 
-  const [displayedLines, setDisplayedLines] = useState([]);
-  const [isTypingFinished, setIsTypingFinished] = useState(false);
-  const [countdown, setCountdown] = useState(CONFIG.COUNTDOWN_DURATION);
-
+  /* ---------- Skip if hidden ---------- */
   useEffect(() => {
-    let isCancelled = false;
+    if (sessionStorage.getItem("greeting_hidden") === "true") {
+      navigate(navigateTo, { replace: true });
+    }
+  }, [navigate, navigateTo]);
 
-    async function typeLines() {
-      const newLines = [];
+  /* ---------- Content ---------- */
+  const greeting = getGreeting();
+  const lines = useMemo(
+    () => [
+      `> Hello User, ${greeting}!`,
+      "> Welcome to Dracket.art. Initializing environment...",
+    ],
+    [greeting]
+  );
 
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-        let currentText = "";
+  const [renderLines, setRenderLines] = useState([]);
+  const [finished, setFinished] = useState(false);
 
-        for (let charIndex = 0; charIndex < line.length; charIndex++) {
-          if (isCancelled) return;
-          currentText += line[charIndex];
-          newLines[i] = currentText;
-          setDisplayedLines([...newLines]);
+  /* ---------- Refs ---------- */
+  const lineIndex = useRef(0);
+  const charIndex = useRef(0);
+  const buffer = useRef([]);
+  const typingTimeout = useRef(null);
+  const redirectTimeout = useRef(null);
 
-          // Random delay and punctuation pause
-          const delay = [",", ".", "!", "?"].includes(line[charIndex])
-            ? randomTypingSpeed() + 80
-            : randomTypingSpeed();
-          await new Promise((res) => setTimeout(res, delay));
-        }
+  const keySound = useRef(
+    typeof Audio !== "undefined"
+      ? new Audio("/sounds/key.mp3")
+      : null
+  );
 
-        await new Promise((res) => setTimeout(res, CONFIG.LINE_DELAY));
+  /* ---------- Navigation helpers ---------- */
+  const skip = () => {
+    clearTimeout(typingTimeout.current);
+    clearTimeout(redirectTimeout.current);
+    navigate(navigateTo);
+  };
+
+  /* ---------- Typing engine ---------- */
+  useEffect(() => {
+    function typeNextChar() {
+      const currentLine = lines[lineIndex.current];
+
+      if (!currentLine) {
+        setFinished(true);
+        return;
       }
 
-      if (!isCancelled) setIsTypingFinished(true);
+      if (!buffer.current[lineIndex.current]) {
+        buffer.current[lineIndex.current] = "";
+      }
+
+      if (charIndex.current < currentLine.length) {
+        buffer.current[lineIndex.current] +=
+          currentLine[charIndex.current];
+        charIndex.current += 1;
+
+        if (keySound.current) {
+          keySound.current.currentTime = 0;
+          keySound.current.volume = 0.12;
+          keySound.current.play().catch(() => {});
+        }
+
+        setRenderLines([...buffer.current]);
+        typingTimeout.current = setTimeout(typeNextChar, randomSpeed());
+      } else {
+        charIndex.current = 0;
+        lineIndex.current += 1;
+        typingTimeout.current = setTimeout(
+          typeNextChar,
+          CONFIG.LINE_DELAY
+        );
+      }
     }
 
-    typeLines();
+    typeNextChar();
 
-    return () => {
-      isCancelled = true;
-    };
-  }, []);
+    return () => clearTimeout(typingTimeout.current);
+  }, [lines]);
 
-  // Countdown after typing finishes
+  /* ---------- Auto redirect after finished ---------- */
   useEffect(() => {
-    if (!isTypingFinished) return;
+    if (!finished) return;
 
-    setCountdown(CONFIG.COUNTDOWN_DURATION);
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+    redirectTimeout.current = setTimeout(() => {
+      navigate(navigateTo);
+    }, CONFIG.AUTO_REDIRECT_DELAY);
 
-    const finishTimeout = setTimeout(
-      () => onFinish(),
-      CONFIG.COUNTDOWN_DURATION * 1000,
-    );
+    return () => clearTimeout(redirectTimeout.current);
+  }, [finished, navigate, navigateTo]);
 
-    return () => {
-      clearInterval(timer);
-      clearTimeout(finishTimeout);
-    };
-  }, [isTypingFinished, onFinish]);
+  /* ---------- Skip on keypress ---------- */
+  useEffect(() => {
+    const onKey = () => skip();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
 
+  /* ---------- UI ---------- */
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black px-6">
-      <div className="space-y-2 text-left w-full max-w-3xl">
-        {displayedLines.map((line, idx) => {
-          const isCurrentLine =
-            idx === displayedLines.length - 1 && !isTypingFinished;
+    <div
+      className="min-h-screen bg-black flex items-center justify-center px-6 text-green-300"
+      onClick={skip}
+    >
+      <div className="w-full max-w-3xl space-y-2 text-left">
+        {renderLines.map((line, idx) => {
+          const isActive =
+            idx === renderLines.length - 1 && !finished;
+
           return (
             <p
               key={idx}
-              className="text-green-400 font-mono text-2xl md:text-4xl leading-snug tracking-wide opacity-0 animate-fade-in"
+              className="font-mono text-xl sm:text-2xl md:text-4xl opacity-0 animate-fade-in text-green-400"
               style={{
-                animationDelay: `${idx * 0.2}s`,
+                animationDelay: `${idx * 0.15}s`,
                 animationFillMode: "forwards",
               }}
             >
               {line}
-              {isCurrentLine && (
-                <span className="blinking-cursor font-mono text-green-400">
-                  |
-                </span>
-              )}
+              {isActive && <span className="blinking-cursor">█</span>}
             </p>
           );
         })}
 
-        {isTypingFinished && (
-          <button
-            onClick={onFinish}
-            className="mt-16 px-8 py-3 bg-green-400/10 text-green-400 font-mono font-semibold rounded-xl hover:bg-green-400/20 transition flex items-center gap-4"
-          >
-            Continue or wait
-            <span className="text-sm text-green-300">{countdown}s</span>
-          </button>
+        {/* Progress bar */}
+        {finished && (
+          <div className="mt-10 space-y-3">
+            <div className="text-xs text-green-500">
+              &gt; boot sequence complete — redirecting
+            </div>
+
+            <div className="h-2 w-full bg-green-900/30 rounded overflow-hidden">
+              <div className="h-full bg-green-400 terminal-progress" />
+            </div>
+
+            <div className="text-xs text-green-600">
+              press any key or click to skip
+            </div>
+
+            <button
+              onClick={() => {
+                sessionStorage.setItem("greeting_hidden", "true");
+                skip();
+              }}
+              className="mt-4 px-4 py-2 text-xs border border-green-700 text-green-400 hover:bg-green-900/40 rounded"
+            >
+              Hide next time
+            </button>
+          </div>
         )}
       </div>
 
+      {/* Styles */}
       <style>{`
         @keyframes fade-in {
-          0% {opacity: 0; transform: translateY(10px);}
-          100% {opacity: 1; transform: translateY(0);}
+          from { opacity: 0; transform: translateY(6px); }
+          to { opacity: 1; transform: translateY(0); }
         }
+
         .animate-fade-in {
-          animation: fade-in 0.4s ease forwards;
+          animation: fade-in 0.3s ease forwards;
         }
 
         .blinking-cursor {
-          display: inline-block;
-          width: 1ch;
+          margin-left: 4px;
           animation: blink 1s steps(1) infinite;
-          margin-left: 2px;
         }
 
         @keyframes blink {
-          0%, 50%, 100% { opacity: 1; }
-          25%, 75% { opacity: 0; }
+          50% { opacity: 0; }
+        }
+
+        .terminal-progress {
+          animation: progress ${CONFIG.AUTO_REDIRECT_DELAY}ms linear forwards;
+          width: 0%;
+        }
+
+        @keyframes progress {
+          from { width: 0%; }
+          to { width: 100%; }
         }
       `}</style>
     </div>
