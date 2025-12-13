@@ -31,11 +31,13 @@ export const PROJECTS = [
   },
   {
     title: "Placen",
-    description: "Customizable VS Code theme with day/night variants, minimal & developer-friendly.",
+    description:
+      "Customizable VS Code theme with day/night variants, minimal & developer-friendly.",
     demo: "https://marketplace.visualstudio.com/items?itemName=Placen",
     repo: "https://github.com/chouhan-abhi/Placen",
-    image: "https://raw.githubusercontent.com/chouhan-abhi/Placens/main/public/ScreenShot1.png",
-  }
+    image:
+      "https://raw.githubusercontent.com/chouhan-abhi/Placens/main/public/ScreenShot1.png",
+  },
 ];
 
 // -----------------------------
@@ -76,7 +78,14 @@ export const EXPERIENCE = [
     duration: "Feb 2024 – Present",
     location: "Bangalore, India",
     description: `Designed and implemented features to enhance lead management platform, including Manage Activities Tab, Calendar & Recurring Task features. Collaborated with cross-functional teams to deliver high-quality, scalable frontend solutions.`,
-    skills: ["React.js", "JavaScript", "TypeScript", "AWS", "CI/CD", "GainSight"],
+    skills: [
+      "React.js",
+      "JavaScript",
+      "TypeScript",
+      "AWS",
+      "CI/CD",
+      "GainSight",
+    ],
   },
   {
     role: "Senior Software Engineer",
@@ -85,7 +94,14 @@ export const EXPERIENCE = [
     duration: "May 2022 – Jan 2024",
     location: "Bangalore, India",
     description: `Implemented Manage Activities which helped 90% of customers track daily leads. Built Calendar & Recurring Task features reducing 80% customer effort. Implemented Date-time & Timezone conversion, feature restriction, and performance logging (New Relic). Developed Search Box, DropDown, and Popup controls.`,
-    skills: ["React.js", "JavaScript", "TypeScript", "AWS", "CI/CD", "New Relic"],
+    skills: [
+      "React.js",
+      "JavaScript",
+      "TypeScript",
+      "AWS",
+      "CI/CD",
+      "New Relic",
+    ],
   },
   {
     role: "Software Engineer",
@@ -153,20 +169,20 @@ export const AWARDS = [
 
 // Hobbies data
 export const HOBBIES = [
-  { 
-    name: "Photography", 
-    icon: Camera, 
+  {
+    name: "Photography",
+    icon: Camera,
     description: "Capturing moments and exploring creative perspectives.",
-    component: PhotographySection
+    component: PhotographySection,
   },
-  { 
-    name: "Music", 
-    icon: Music, 
-    description: "Playing guitar and exploring different genres."
+  {
+    name: "Music",
+    icon: Music,
+    description: "Playing guitar and exploring different genres.",
   },
-  { 
-    name: "Gaming", 
-    icon: Gamepad, 
+  {
+    name: "Gaming",
+    icon: Gamepad,
     description: "Competitive gaming, Valorant tracker, and my stats overview.",
     stats: {
       rating: "Unranked",
@@ -174,7 +190,7 @@ export const HOBBIES = [
       kda: 1.18,
       winRate: "36.4%",
       topAgents: [
-        { name: "Yoru", matches: 5, win: "20%", kda: 1.10 },
+        { name: "Yoru", matches: 5, win: "20%", kda: 1.1 },
         { name: "Jett", matches: 3, win: "33.3%", kda: 0.79 },
         { name: "Omen", matches: 3, win: "66.7%", kda: 1.77 },
       ],
@@ -182,18 +198,24 @@ export const HOBBIES = [
         { name: "Vandal", type: "Assault Rifle", kills: 150 },
         { name: "Guardian", type: "Assault Rifle", kills: 31 },
         { name: "Ghost", type: "Sidearm", kills: 22 },
-      ]
-    }
+      ],
+    },
   },
-  { 
-    name: "Projects", 
-    icon: Gamepad, 
-    description: "Building fun and engaging projects in my free time."
+  {
+    name: "Projects",
+    icon: Gamepad,
+    description: "Building fun and engaging projects in my free time.",
   },
-  { 
-    name: "Misc", 
-    icon: BookOpen, 
+  {
+    name: "Misc",
+    icon: BookOpen,
     description: "Other interests and side activities.",
-    data: ['Book reading', 'Photo and cinematography', 'Formula 1', 'Puzzle solving', 'Tech blogs']
+    data: [
+      "Book reading",
+      "Photo and cinematography",
+      "Formula 1",
+      "Puzzle solving",
+      "Tech blogs",
+    ],
   },
-]; 
+];

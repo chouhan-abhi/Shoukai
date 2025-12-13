@@ -14,9 +14,7 @@ export default function TerminalNav({ mobile = false }) {
     >
       {/* Prompt (desktop only) */}
       {!mobile && (
-        <div className="text-green-400 mb-6 select-none">
-          user@dracket:~$
-        </div>
+        <div className="text-green-400 mb-6 select-none">user@dracket:~$</div>
       )}
 
       <ul className={`${mobile ? "flex gap-6" : "space-y-3"}`}>
@@ -29,11 +27,7 @@ export default function TerminalNav({ mobile = false }) {
               onClick={() => navigate(link.path)}
               className={`
                 cursor-pointer flex items-center
-                ${
-                  active
-                    ? "text-white"
-                    : "text-green-400 hover:text-green-300"
-                }
+                ${active ? "text-white" : "text-green-400 hover:text-green-300"}
               `}
             >
               {!mobile && <span className="mr-2">{">"}</span>}

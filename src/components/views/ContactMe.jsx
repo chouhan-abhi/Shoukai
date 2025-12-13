@@ -50,9 +50,7 @@ export default function ContactMe() {
   return (
     <section className="w-full py-40 bg-[#0a0a0a]">
       <div className="flex flex-col justify-center gap-4 max-w-xl mx-auto p-6">
-        <div className="text-2xl my-4 font-bold text-green-400">
-          Contact
-        </div>
+        <div className="text-2xl my-4 font-bold text-green-400">Contact</div>
 
         <ul className="space-y-4">
           {CONTACT_LINKS.map((link) => {

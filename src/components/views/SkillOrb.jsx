@@ -146,11 +146,10 @@ export default function SkillOrb() {
     const max = 160;
     const val = Math.min(
       max,
-      Math.max(min, Math.floor((years / 7) * (max - min) + min))
+      Math.max(min, Math.floor((years / 7) * (max - min) + min)),
     );
     return `rgba(0,${val},0,0.18)`;
   };
-
 
   return (
     <section className="w-full flex flex-col items-center py-40">
@@ -245,7 +244,6 @@ export default function SkillOrb() {
           })}
         </div>
       </div>
-
     </section>
   );
 }

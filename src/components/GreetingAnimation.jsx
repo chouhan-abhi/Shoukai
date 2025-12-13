@@ -18,8 +18,7 @@ function getGreeting() {
 function randomSpeed() {
   return (
     CONFIG.TYPING_SPEED_MIN +
-    Math.random() *
-      (CONFIG.TYPING_SPEED_MAX - CONFIG.TYPING_SPEED_MIN)
+    Math.random() * (CONFIG.TYPING_SPEED_MAX - CONFIG.TYPING_SPEED_MIN)
   );
 }
 
@@ -40,7 +39,7 @@ export default function GreetingAnimation({ navigateTo = "/home" }) {
       `> Hello User, ${greeting}!`,
       "> Welcome to Dracket.art. Initializing environment...",
     ],
-    [greeting]
+    [greeting],
   );
 
   const [renderLines, setRenderLines] = useState([]);
@@ -54,9 +53,7 @@ export default function GreetingAnimation({ navigateTo = "/home" }) {
   const redirectTimeout = useRef(null);
 
   const keySound = useRef(
-    typeof Audio !== "undefined"
-      ? new Audio("/sounds/key.mp3")
-      : null
+    typeof Audio !== "undefined" ? new Audio("/sounds/key.mp3") : null,
   );
 
   /* ---------- Navigation helpers ---------- */
@@ -81,8 +78,7 @@ export default function GreetingAnimation({ navigateTo = "/home" }) {
       }
 
       if (charIndex.current < currentLine.length) {
-        buffer.current[lineIndex.current] +=
-          currentLine[charIndex.current];
+        buffer.current[lineIndex.current] += currentLine[charIndex.current];
         charIndex.current += 1;
 
         if (keySound.current) {
@@ -96,10 +92,7 @@ export default function GreetingAnimation({ navigateTo = "/home" }) {
       } else {
         charIndex.current = 0;
         lineIndex.current += 1;
-        typingTimeout.current = setTimeout(
-          typeNextChar,
-          CONFIG.LINE_DELAY
-        );
+        typingTimeout.current = setTimeout(typeNextChar, CONFIG.LINE_DELAY);
       }
     }
 
@@ -134,8 +127,7 @@ export default function GreetingAnimation({ navigateTo = "/home" }) {
     >
       <div className="w-full max-w-3xl space-y-2 text-left">
         {renderLines.map((line, idx) => {
-          const isActive =
-            idx === renderLines.length - 1 && !finished;
+          const isActive = idx === renderLines.length - 1 && !finished;
 
           return (
             <p

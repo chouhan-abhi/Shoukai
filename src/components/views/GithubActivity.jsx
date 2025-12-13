@@ -12,10 +12,10 @@ export default function GitHubActivity() {
     async function fetchGitHubData() {
       try {
         const profileRes = await fetch(
-          `https://api.github.com/users/${USERNAME}`
+          `https://api.github.com/users/${USERNAME}`,
         );
         const reposRes = await fetch(
-          `https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=5`
+          `https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=5`,
         );
 
         const profileData = await profileRes.json();
@@ -35,9 +35,7 @@ export default function GitHubActivity() {
 
   if (loading) {
     return (
-      <p className="text-green-600 text-sm">
-        &gt; fetching git activity...
-      </p>
+      <p className="text-green-600 text-sm">&gt; fetching git activity...</p>
     );
   }
 
@@ -46,9 +44,7 @@ export default function GitHubActivity() {
   return (
     <div className="space-y-6 text-sm text-green-400">
       {/* Header */}
-      <div className="flex mt-8 text-green-500">
-        Github Activity
-      </div>
+      <div className="flex mt-8 text-green-500">Github Activity</div>
 
       {/* Profile stats */}
       <div className="bg-[#0f0f0f] p-2 rounded">
@@ -62,9 +58,7 @@ export default function GitHubActivity() {
 
       {/* Recent repos */}
       <div className="bg-[#0f0f0f] p-2 rounded">
-        <p className="mb-2 text-green-500">
-            Recent repositories
-        </p>
+        <p className="mb-2 text-green-500">Recent repositories</p>
 
         <ul className="space-y-1">
           {repos.map((repo) => (
@@ -88,9 +82,7 @@ export default function GitHubActivity() {
 
       {/* Heatmap */}
       <div className="bg-[#0f0f0f] p-2 rounded">
-        <p className="mb-2 text-green-500">
-          Git commit log --calendar
-        </p>
+        <p className="mb-2 text-green-500">Git commit log --calendar</p>
 
         <div className="overflow-x-auto">
           <img

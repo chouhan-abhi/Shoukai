@@ -4,7 +4,6 @@ import { PROJECTS } from "../../data/userData";
 export default function ProjectsConsoleCard() {
   return (
     <div className="max-w-4xl mx-auto bg-[#0a0a0a] border border-green-500/30 rounded-2xl shadow-[0_0_30px_rgba(0,255,0,0.15)] overflow-hidden font-mono text-green-400">
-      
       {/* Question prompt */}
       <div className="px-6 py-4 border-b border-green-500/20 bg-[#0a0a0a]">
         <p>Quick links?</p>

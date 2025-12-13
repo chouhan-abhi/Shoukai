@@ -4,7 +4,6 @@ import { PHOTOS_DATA } from "../../data/configs";
 const PhotographySection = () => {
   return (
     <section className="relative w-full py-4 bg-[#0a0a0a] font-mono text-green-400">
-      
       {/* Photo Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {PHOTOS_DATA.map((photo, idx) => (
