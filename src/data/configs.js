@@ -1,6 +1,6 @@
 export const DEV_SKILLS = [
   { name: "React", years: 5, level: "expert" },
-  { name: "TypeScript", years: 5, level: "expert" },
+  { name: "TypeScript", years: 2, level: "expert" },
   { name: "JavaScript", years: 5, level: "expert" },
   { name: "HTML", years: 6, level: "expert" },
   { name: "CSS", years: 5, level: "advanced" },
@@ -60,7 +60,7 @@ export const PHOTOS_DATA = [
     alt: "Photography 7",
   },
   {
-    src: "https://images.pexels.com/photos/14949826/pexels-photo-14949826.jpeg",
+    src: "https://images.pexels.com/photos/30801626/pexels-photo-30801626.jpeg",
     alt: "Photography 8",
   },
   {
@@ -68,7 +68,7 @@ export const PHOTOS_DATA = [
     alt: "Photography 9",
   },
   {
-    src: "https://images.pexels.com/photos/13829842/pexels-photo-13829842.jpeg",
+    src: "https://images.pexels.com/photos/23174888/pexels-photo-23174888.jpeg",
     alt: "Photography 11",
   },
   {
@@ -80,11 +80,15 @@ export const PHOTOS_DATA = [
     alt: "Photography 13",
   },
   {
-    src: "https://images.pexels.com/photos/14949825/pexels-photo-14949825.jpeg",
+    src: "https://images.pexels.com/photos/13829843/pexels-photo-13829843.jpeg",
     alt: "Photography 14",
   },
   {
     src: "https://images.pexels.com/photos/23359999/pexels-photo-23359999.jpeg",
     alt: "Photography 15",
   },
+  {
+    src: "https://images.pexels.com/photos/13829794/pexels-photo-13829794.jpeg",
+    alt: "Photography 16",
+  }
 ];

@@ -30,6 +30,15 @@ export const PROJECTS = [
       "https://raw.githubusercontent.com/chouhan-abhi/PitStop/refs/heads/main/public/ScreenShots/Quickstop_f1_screenshot4.png",
   },
   {
+    title: "Ghostty Config Generator",
+    description:
+      "Visual configuration generator for Ghostty terminal with live preview, presets, import/export, and schema-driven settings.",
+    demo: "https://config.dracket.art",
+    repo: "https://github.com/chouhan-abhi/ConfigManager",
+    image:
+      "https://raw.githubusercontent.com/chouhan-abhi/ConfigManager/refs/heads/main/public/ScreenShots/preview.png",
+  },
+  {
     title: "Placen",
     description:
       "Customizable VS Code theme with day/night variants, minimal & developer-friendly.",
@@ -39,6 +48,7 @@ export const PROJECTS = [
       "https://raw.githubusercontent.com/chouhan-abhi/Placens/main/public/ScreenShot1.png",
   },
 ];
+
 
 // -----------------------------
 // SKILLS
