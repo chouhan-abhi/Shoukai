@@ -1,14 +1,15 @@
 export const DEV_SKILLS = [
-  { name: "React", years: 5, level: "expert" },
-  { name: "TypeScript", years: 2, level: "expert" },
-  { name: "JavaScript", years: 5, level: "expert" },
-  { name: "HTML", years: 6, level: "expert" },
-  { name: "CSS", years: 5, level: "advanced" },
-  { name: "Git", years: 7, level: "expert" },
+  { name: "React", years: 5, level: "professional" },
+  { name: "JavaScript", years: 5, level: "professional" },
+  { name: "HTML", years: 6, level: "professional" },
+  { name: "CSS", years: 5, level: "intermediate" },
+  { name: "Git", years: 7, level: "professional" },
 
   { name: "Tailwind", years: 3, level: "advanced" },
   { name: "Vite", years: 3, level: "advanced" },
   { name: "Webpack", years: 3, level: "advanced" },
+
+  { name: "TypeScript", years: 2, level: "intermediate" },
   { name: "Jest", years: 3, level: "advanced" },
 
   { name: "Redux", years: 1, level: "intermediate" },
@@ -24,10 +25,8 @@ export const DEV_SKILLS = [
 
 export const NAV_ARRAY = [
   { label: "Home", path: "/home" },
-  { label: "Skills", path: "/skills" },
-  { label: "About me", path: "/about" },
   { label: "Hobbies", path: "/hobbies" },
-  { label: "Contact Me", path: "/contact" },
+  { label: "About me", path: "/about" },
 ];
 
 export const PHOTOS_DATA = [

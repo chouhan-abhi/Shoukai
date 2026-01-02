@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { DEV_SKILLS } from "../../data/configs";
+import { DEV_SKILLS } from "../../../data/configs";
 
 /* ---------- Helpers ---------- */
 const orbSize = (years) => {
@@ -152,98 +152,108 @@ export default function SkillOrb() {
   };
 
   return (
-    <section className="w-full flex flex-col items-center py-40">
-      <div
-        ref={containerRef}
-        className="relative w-[440px] h-[440px] rounded-full
-                   bg-black border border-green-500/20
-                   shadow-[0_0_60px_rgba(0,255,156,0.3)]"
-      >
-        {DEV_SKILLS.map((skill, i) => (
-          <button
-            key={skill.name}
-            ref={(el) => (itemsRef.current[i] = el)}
-            data-skill={skill.name}
-            onClick={() => onSkillClick(skill.name)}
-            className={`
-              absolute left-1/2 top-1/2
-              font-mono text-green-400
-              bg-black/80 border border-green-500/30 rounded-md
-              transition-all duration-300
-              cursor-pointer
-              ${orbSize(parseFloat(skill.years))}
-              ${orbGlow(parseFloat(skill.years), activeSkill === skill.name)}
-            `}
-          >
-            {skill.name}
-          </button>
-        ))}
-      </div>
-
-      {/* ---------- Terminal Focus Mode ---------- */}
-      {activeSkill && (
-        <div className="mt-12 font-mono text-green-400 bg-black/60 px-6 py-4 border border-green-500/30">
-          &gt; focus --skill="{activeSkill}"
-          <br />
-          &gt; status: frozen
-          <br />
-          &gt; press ESC to resume
-        </div>
-      )}
-
-      {/* ---------- Skill Matrix ---------- */}
-      <div className="mt-28 w-full max-w-5xl">
-        <p className="mb-4 text-green-400/80 font-mono text-sm tracking-widest">
-          SKILL MATRIX — AREA ∝ EXPERIENCE
-        </p>
-
-        <div
-          className="grid w-full border border-green-500/20"
-          style={{
-            gridTemplateColumns: "repeat(6, 1fr)",
-            gridAutoRows: "1fr",
-            maxHeight: "480px",
-          }}
-        >
-          {DEV_SKILLS.map((skill) => {
-            const years = parseFloat(skill.years);
-            const span = Math.min(3, Math.max(1, Math.round(years / 2)));
-            const focused = activeSkill === skill.name;
-
-            return (
-              <button
-                key={skill.name}
-                onClick={() => onSkillClick(skill.name)}
-                className={`
-            relative border border-green-500/30
-            font-mono flex flex-col items-center justify-center
-            transition-all duration-300
-            ${activeSkill && !focused ? "opacity-30" : ""}
-            ${focused ? "ring-2 ring-green-400 z-10" : ""}
-          `}
-                style={{
-                  backgroundColor: getGreenShade(years),
-                  gridColumnEnd: `span ${span}`,
-                  gridRowEnd: `span ${span}`,
-                }}
-              >
-                <span className="text-sm font-semibold text-green-200">
+    <section className="w-full min-h-screen px-6 py-12 flex justify-center">
+      <div className="w-full max-w-[1400px]">
+        {/* ---------- Responsive Layout ---------- */}
+        <div className="grid grid-cols-1 lg:grid-cols-[520px_1fr] gap-16 items-start">
+          {/* ---------- LEFT: Orb + Focus ---------- */}
+          <div className="flex flex-col items-center mt-8 lg:items-start">
+            <div
+              ref={containerRef}
+              className="relative w-[360px] h-[360px] sm:w-[420px] sm:h-[420px]
+                       rounded-full bg-black
+                       border border-green-500/20
+                       shadow-[0_0_60px_rgba(0,255,156,0.3)]"
+            >
+              {DEV_SKILLS.map((skill, i) => (
+                <button
+                  key={skill.name}
+                  ref={(el) => (itemsRef.current[i] = el)}
+                  data-skill={skill.name}
+                  onClick={() => onSkillClick(skill.name)}
+                  className={`
+                  absolute left-1/2 top-1/2
+                  font-mono text-green-400
+                  bg-black/80 border border-green-500/30 rounded-md
+                  transition-all duration-300
+                  cursor-pointer
+                  ${orbSize(parseFloat(skill.years))}
+                  ${orbGlow(parseFloat(skill.years), activeSkill === skill.name)}
+                `}
+                >
                   {skill.name}
-                </span>
-                <span className="text-xs text-green-400">
-                  {skill.years} yrs
-                </span>
+                </button>
+              ))}
+            </div>
 
-                {focused && (
-                  <span className="absolute bottom-1 right-1 text-[10px] text-green-300">
-                    FOCUSED
-                  </span>
-                )}
-              </button>
-            );
-          })}
+            {/* ---------- Terminal Focus Mode ---------- */}
+            {activeSkill && (
+              <div className="mt-10 w-full max-w-md font-mono text-green-400
+                            bg-black/70 px-6 py-4 border border-green-500/30
+                            shadow-[0_0_20px_rgba(0,255,156,0.2)]">
+                <div>&gt; focus --skill="{activeSkill}"</div>
+                <div>&gt; status: frozen</div>
+                <div>&gt; press <span className="text-green-200">ESC</span> to resume</div>
+              </div>
+            )}
+          </div>
+
+          {/* ---------- RIGHT: Skill Matrix ---------- */}
+          <div className="w-full">
+            <p className="mb-2 text-green-400/80 font-mono text-sm tracking-widest">
+              SKILL MATRIX — AREA ∝ EXPERIENCE
+            </p>
+
+            <div
+              className="grid w-full border border-green-500/20"
+              style={{
+                gridTemplateColumns: "repeat(6, 1fr)",
+                gridAutoRows: "1fr",
+                maxHeight: "520px",
+              }}
+            >
+              {DEV_SKILLS.map((skill) => {
+                const years = parseFloat(skill.years);
+                const span = Math.min(3, Math.max(1, Math.round(years / 2)));
+                const focused = activeSkill === skill.name;
+
+                return (
+                  <button
+                    key={skill.name}
+                    onClick={() => onSkillClick(skill.name)}
+                    className={`
+                    relative border border-green-500/30
+                    font-mono flex flex-col items-center justify-center
+                    transition-all duration-300
+                    ${activeSkill && !focused ? "opacity-30" : ""}
+                    ${focused ? "ring-2 ring-green-400 z-10" : ""}
+                  `}
+                    style={{
+                      backgroundColor: getGreenShade(years),
+                      gridColumnEnd: `span ${span}`,
+                      gridRowEnd: `span ${span}`,
+                    }}
+                  >
+                    <span className="text-sm font-semibold text-green-200">
+                      {skill.name}
+                    </span>
+                    <span className="text-xs text-green-400">
+                      {skill.years} yrs
+                    </span>
+
+                    {focused && (
+                      <span className="absolute bottom-1 right-1 text-[10px] text-green-300">
+                        FOCUSED
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
+
 }

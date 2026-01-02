@@ -8,13 +8,11 @@ import { lazy, Suspense } from "react";
 
 import GreetingAnimation from "./components/GreetingAnimation";
 import TerminalNav from "./components/TerminalNav";
+import AboutMe from "./components/views/AboutMe";
 
 /* ---------- Lazy Loaded Pages ---------- */
 const Launchpad = lazy(() => import("./components/Launchpad"));
-const Portfolio = lazy(() => import("./components/Portfolio"));
-const SkillOrb = lazy(() => import("./components/views/SkillOrb"));
-const ContactMe = lazy(() => import("./components/views/ContactMe"));
-const HobbiesSection = lazy(() => import("./components/views/Hobbies"));
+const HobbiesSection = lazy(() => import("./components/views/Hobbies/Hobbies"));
 
 /* ---------- Terminal Loader ---------- */
 function TerminalLoader() {
@@ -48,26 +46,10 @@ export default function App() {
             }
           />
           <Route
-            path="/skills"
-            element={
-              <Suspense fallback={<TerminalLoader />}>
-                <SkillOrb />
-              </Suspense>
-            }
-          />
-          <Route
             path="/about"
             element={
               <Suspense fallback={<TerminalLoader />}>
-                <Portfolio />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <Suspense fallback={<TerminalLoader />}>
-                <ContactMe />
+                <AboutMe />
               </Suspense>
             }
           />

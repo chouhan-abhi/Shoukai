@@ -6,12 +6,46 @@ import {
   EDUCATION,
   CERTIFICATIONS,
   AWARDS,
-} from "../data/userData"; // import all your constants
+} from "../../../data/userData"; // import all your constants
 
 export default function Portfolio() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white font-sans px-8 py-16 flex flex-col items-start space-y-24 max-w-5xl mx-auto">
-      {/* Hero */}
+    <main
+      id="print-portfolio"
+      className="
+    min-h-screen
+    print:min-h-0
+    print:h-auto
+    print:overflow-visible
+    bg-[#0a0a0a]
+    text-white
+    font-sans
+    px-8
+    py-16
+    flex
+    flex-col
+    items-start
+    space-y-24
+    max-w-5xl
+  "
+    >
+
+      <button
+        onClick={() => window.print()}
+        className="
+        print:hidden
+            fixed top-6 right-6 z-50
+            px-4 py-2 text-sm
+            font-semibold
+            bg-green-500/10 text-green-300
+            border border-green-500/30
+            rounded-md
+            hover:bg-green-500/20
+            hover:shadow-[0_0_10px_rgba(0,255,156,0.4)]
+            transition"
+      >
+        Download PDF
+      </button>
       <section className="space-y-4">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white drop-shadow-[0_0_10px_rgba(0,255,0,0.7)]">
           Abhishek Chouhan
@@ -20,7 +54,8 @@ export default function Portfolio() {
           Frontend Engineer at Sequoia | Formerly Leadsquared & SAP Labs | MTech
           BITS Pilani | Passionate Web Developer
         </p>
-        <p className="text-white/60 text-sm">Bengaluru, Karnataka, India</p>
+        <p className="text-white/60 text-sm">Bengaluru, Karnataka, India
+        </p>
       </section>
 
       {/* Summary */}
@@ -91,7 +126,8 @@ export default function Portfolio() {
       </section>
 
       {/* Education */}
-      <section className="relative">
+     <section className="relative break-inside-avoid-page">
+
         <h2 className="text-3xl font-bold text-white drop-shadow-[0_0_10px_rgba(0,255,0,0.7)] mb-8">
           Education
         </h2>
@@ -123,19 +159,26 @@ export default function Portfolio() {
       </section>
 
       {/* Projects */}
-      <section id="projects" className="space-y-6">
+      <section id="projects" className="space-y-6 print:space-y-1">
         <h2 className="text-3xl font-bold text-white drop-shadow-[0_0_10px_rgba(0,255,156,0.6)] mb-6">
           Featured Projects
         </h2>
         <div className="space-y-5">
           {PROJECTS.map((p, i) => (
             <a
-              key={i}
-              href={p.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col md:flex-row bg-[#111111] rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_0_14px_rgba(0,255,156,0.35)]"
+              className="
+                group
+                flex
+                flex-col
+                md:flex-row
+                bg-[#111111]
+                print:bg-transparent
+                print:border-none
+                print:p-0
+                rounded-xl
+                overflow-hidden"
             >
+
               <div className="w-full md:w-[280px] h-[180px] flex-shrink-0 overflow-hidden">
                 <img
                   src={p.image}

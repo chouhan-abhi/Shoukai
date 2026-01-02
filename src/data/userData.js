@@ -1,5 +1,5 @@
 import { Music, Camera, Gamepad, BookOpen } from "lucide-react";
-import PhotographySection from "../components/views/PhotographySection";
+import PhotographySection from "../components/views/Hobbies/PhotographySection";
 
 export const PROJECTS = [
   {

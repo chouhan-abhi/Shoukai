@@ -58,9 +58,11 @@ h6 {
 h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
 }
+
 h2 {
   font-size: clamp(1.5rem, 3.5vw, 2.5rem);
 }
+
 h3 {
   font-size: clamp(1.25rem, 2.6vw, 1.75rem);
 }
@@ -72,6 +74,7 @@ h3 {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgb(200 200 200 / 40%);
   border-radius: 4px;
@@ -90,6 +93,7 @@ h3 {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -100,6 +104,7 @@ h3 {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -110,6 +115,7 @@ h3 {
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -120,9 +126,11 @@ h3 {
 .fade-up {
   animation: fade-up 0.5s ease forwards;
 }
+
 .fade {
   animation: fade 0.5s ease forwards;
 }
+
 .slide-left {
   animation: slide-left 0.5s ease forwards;
 }
@@ -151,9 +159,11 @@ h3 {
 .radius-sm {
   border-radius: var(--radius-sm);
 }
+
 .radius-md {
   border-radius: var(--radius-md);
 }
+
 .radius-lg {
   border-radius: var(--radius-lg);
 }
@@ -161,9 +171,11 @@ h3 {
 .shadow-token-sm {
   box-shadow: var(--shadow-sm);
 }
+
 .shadow-token-md {
   box-shadow: var(--shadow-md);
 }
+
 .shadow-token-lg {
   box-shadow: var(--shadow-lg);
 }
@@ -183,13 +195,120 @@ a {
 }
 
 @keyframes blink {
+
   0%,
   50%,
   100% {
     opacity: 1;
   }
+
   25%,
   75% {
     opacity: 0;
+  }
+}
+
+@media print {
+
+  /* Print only the portfolio */
+  body * {
+    visibility: hidden;
+  }
+
+  #print-portfolio,
+  #print-portfolio * {
+    visibility: visible;
+  }
+
+  #print-portfolio {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  /* Reset layout constraints */
+  html,
+  body {
+    background: white !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Remove dark theme */
+  #print-portfolio {
+    background: white !important;
+    color: #111 !important;
+  }
+
+  /* Hide UI-only elements */
+  button,
+  a[href],
+  nav,
+  footer {
+    display: none !important;
+  }
+
+  /* Hide images (projects thumbnails etc.) */
+  img {
+    display: none !important;
+  }
+
+  /* Remove shadows, glows, borders */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Typography tuning */
+  h1 {
+    font-size: 28px !important;
+  }
+
+  h2 {
+    font-size: 18px !important;
+    margin-top: 24px;
+  }
+
+  h3 {
+    font-size: 14px !important;
+  }
+
+  p,
+  li,
+  span {
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Page break control */
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Timeline fix */
+  .border-l-2 {
+    border-color: #ccc !important;
+  }
+
+  /* Remove absolute positioned dots */
+  .absolute {
+    display: none !important;
+  }
+}
+
+@media print {
+  .break-inside-avoid-page {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  @page {
+    margin: 20mm;
+  }
+
+  @page :footer {
+    content: "Abhishek Chouhan | Frontend Engineer";
   }
 }

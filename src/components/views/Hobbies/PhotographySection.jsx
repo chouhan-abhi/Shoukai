@@ -1,5 +1,5 @@
 import { ExternalLink } from "lucide-react";
-import { PHOTOS_DATA } from "../../data/configs";
+import { PHOTOS_DATA } from "../../../data/configs";
 
 const PhotographySection = () => {
   return (
