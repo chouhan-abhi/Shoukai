@@ -1,5 +1,4 @@
 const SubTerminal = ({
-    title,
     command,
     children,
 }) => {

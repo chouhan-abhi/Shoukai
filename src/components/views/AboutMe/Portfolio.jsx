@@ -164,7 +164,7 @@ export default function Portfolio() {
           Featured Projects
         </h2>
         <div className="space-y-5">
-          {PROJECTS.map((p, i) => (
+          {PROJECTS.map(p => (
             <a
               className="
                 group
