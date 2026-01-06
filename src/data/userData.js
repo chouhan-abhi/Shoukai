@@ -82,65 +82,155 @@ export const SKILLS = [
 // -----------------------------
 export const EXPERIENCE = [
   {
-    role: "Frontend Engineer 2",
+    role: "Frontend Software Engineer II",
     company: "Sequoia",
-    project: "Marvin Forms",
     duration: "Feb 2024 – Present",
-    location: "Bangalore, India",
-    description: `Designed and implemented features to enhance lead management platform, including Manage Activities Tab, Calendar & Recurring Task features. Collaborated with cross-functional teams to deliver high-quality, scalable frontend solutions.`,
+    location: "Bengaluru, India",
+    description: `
+• Core member of the Kernel team responsible for building and maintaining the
+  shared frontend platform and UI foundations used across multiple products.
+
+• Owned frontend architecture for user identity systems including authentication,
+  role-based authorization, permissions, cross-organization access, and user
+  impersonation, supporting secure multi-tenant workflows.
+
+• Designed and implemented scalable login and identity flows with extensibility
+  for future products, collaborating closely with backend, platform, and
+  security teams on system design decisions.
+
+• Built and maintained reusable UI components and base platform code that
+  enabled product teams to rapidly build new features with consistency and
+  reduced duplication.
+
+• Actively contributed to frontend and backend design discussions, influencing
+  API contracts, data models, and platform-level architectural decisions to
+  ensure scalability, security, and maintainability.
+    `,
     skills: [
-      "React.js",
-      "JavaScript",
+      "React",
       "TypeScript",
+      "Platform Architecture",
+      "Authentication & Authorization",
+      "Design Systems",
       "AWS",
       "CI/CD",
-      "GainSight",
     ],
   },
+
   {
     role: "Senior Software Engineer",
     company: "LeadSquared",
-    project: "Marvin Forms",
     duration: "May 2022 – Jan 2024",
-    location: "Bangalore, India",
-    description: `Implemented Manage Activities which helped 90% of customers track daily leads. Built Calendar & Recurring Task features reducing 80% customer effort. Implemented Date-time & Timezone conversion, feature restriction, and performance logging (New Relic). Developed Search Box, DropDown, and Popup controls.`,
+    location: "Bengaluru, India",
+    description: `
+• Led frontend development for key CRM platform features including Manage
+  Activities, Calendar, and Recurring Tasks, impacting over 90% of active
+  customers.
+
+• Designed a scalable activity management system that enabled users to track
+  daily leads and tasks, significantly improving workflow visibility and
+  operational efficiency.
+
+• Architected a calendar and recurring task solution with timezone-safe date
+  handling, reducing manual customer effort by ~80% and supporting global users.
+
+• Built reusable UI controls such as search components, dropdowns, and popups
+  that were adopted across multiple teams to accelerate feature delivery.
+
+• Implemented performance monitoring and logging using New Relic, proactively
+  identifying bottlenecks and improving frontend reliability in production.
+
+• Collaborated with backend and product teams on API design, data contracts,
+  and feature rollout strategies to ensure smooth cross-team execution.
+    `,
     skills: [
-      "React.js",
+      "React",
       "JavaScript",
       "TypeScript",
-      "AWS",
-      "CI/CD",
+      "Frontend System Design",
+      "Performance Optimization",
       "New Relic",
+      "AWS",
     ],
   },
+
   {
     role: "Software Engineer",
-    company: "SAP Labs",
-    project: "CRM Sales REX",
+    company: "LeadSquared",
     duration: "Apr 2021 – May 2022",
-    location: "Bangalore, India",
-    description: `Enhanced Document Library UX through lazy loading & background uploads (40% adoption increase). Authored Output Management app, Pricing, and Decision Table features.`,
-    skills: ["React.js", "TypeScript", "UI/UX", "Agile"],
+    location: "Bengaluru, India",
+    description: `
+• Improved Document Library user experience by implementing lazy loading and
+  background uploads, increasing feature adoption by approximately 40%.
+
+• Developed core product features including Output Management, Pricing, and
+  Decision Tables, contributing to enterprise-grade CRM workflows.
+
+• Focused on UI performance, responsiveness, and usability while maintaining
+  alignment with existing design and architectural standards.
+
+• Worked closely with senior engineers to understand system-level design
+  decisions and gradually take ownership of larger feature areas.
+    `,
+    skills: [
+      "React",
+      "TypeScript",
+      "UI/UX",
+      "Performance Optimization",
+      "Agile Development",
+    ],
   },
+
   {
     role: "Full Stack Developer",
     company: "SAP Labs",
-    project: "SAP BLR Tools",
     duration: "May 2020 – Mar 2021",
-    location: "Bangalore, India",
-    description: `Built centralized reporting tool integrating multiple data sources for 8 teams, reducing reporting time by 50%.`,
-    skills: ["React.js", "Java", "SAP ABAP", "Backend", "Database"],
+    location: "Bengaluru, India",
+    description: `
+• Built a centralized reporting platform aggregating data from multiple systems,
+  enabling 8+ teams to access unified insights and reducing reporting time by
+  nearly 50%.
+
+• Developed frontend interfaces using React and backend services using Java and
+  SAP technologies, gaining hands-on experience across the full stack.
+
+• Collaborated with stakeholders to define data models, reporting requirements,
+  and system workflows for internal enterprise tools.
+    `,
+    skills: [
+      "React",
+      "Java",
+      "Backend Systems",
+      "Data Integration",
+      "Enterprise Applications",
+    ],
   },
+
   {
     role: "Back-End Developer",
     company: "SAP Labs",
-    project: "Tax Register",
     duration: "Aug 2019 – May 2020",
-    location: "Bangalore, India",
-    description: `Invoice document posting using API & ABAP reports; performed POCs on data migration (1M+ records).`,
-    skills: ["ABAP", "Backend", "Data Migration"],
+    location: "Bengaluru, India",
+    description: `
+• Developed backend services for invoice document posting using APIs and SAP
+  ABAP, supporting enterprise-scale financial workflows.
+
+• Built and optimized ABAP reports and performed proof-of-concepts for large-scale
+  data migration involving 1M+ records.
+
+• Gained strong exposure to enterprise systems, data consistency challenges,
+  and performance considerations at scale.
+    `,
+    skills: [
+      "SAP ABAP",
+      "Backend Development",
+      "APIs",
+      "Data Migration",
+      "Enterprise Systems",
+    ],
   },
 ];
+
 
 // -----------------------------
 // EDUCATION
