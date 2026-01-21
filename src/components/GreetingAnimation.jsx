@@ -22,17 +22,26 @@ function randomSpeed() {
   );
 }
 
+function getCookie(name) {
+  const cookies = document.cookie.split("; ");
+  for (let c of cookies) {
+    const [key, value] = c.split("=");
+    if (key === name) {
+      return decodeURIComponent(value);
+    }
+  }
+  return null;
+}
+
+function setCookie(name, value, days) {
+  const expires = new Date();
+  expires.setDate(expires.getDate() + days);
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires.toUTCString()}`;
+}
+
 export default function GreetingAnimation({ navigateTo = "/home" }) {
   const navigate = useNavigate();
 
-  /* ---------- Skip if hidden ---------- */
-  useEffect(() => {
-    if (sessionStorage.getItem("greeting_hidden") === "true") {
-      navigate(navigateTo, { replace: true });
-    }
-  }, [navigate, navigateTo]);
-
-  /* ---------- Content ---------- */
   const greeting = getGreeting();
   const lines = useMemo(
     () => [
@@ -84,7 +93,7 @@ export default function GreetingAnimation({ navigateTo = "/home" }) {
         if (keySound.current) {
           keySound.current.currentTime = 0;
           keySound.current.volume = 0.12;
-          keySound.current.play().catch(() => {});
+          keySound.current.play().catch(() => { });
         }
 
         setRenderLines([...buffer.current]);
@@ -103,9 +112,15 @@ export default function GreetingAnimation({ navigateTo = "/home" }) {
 
   /* ---------- Auto redirect after finished ---------- */
   useEffect(() => {
+    if (getCookie("hideHomePageGreeting") === "true") {
+      skip();
+      return;
+    };
+
     if (!finished) return;
 
     redirectTimeout.current = setTimeout(() => {
+      setCookie("hideHomePageGreeting", "true", 1);
       navigate(navigateTo);
     }, CONFIG.AUTO_REDIRECT_DELAY);
 
@@ -161,7 +176,7 @@ export default function GreetingAnimation({ navigateTo = "/home" }) {
 
             <button
               onClick={() => {
-                sessionStorage.setItem("greeting_hidden", "true");
+                setCookie("hideHomePageGreeting", "true", 1);
                 skip();
               }}
               className="mt-4 px-4 py-2 text-xs border border-green-700 text-green-400 hover:bg-green-900/40 rounded"

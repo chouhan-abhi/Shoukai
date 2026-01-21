@@ -31,38 +31,28 @@ function TerminalLoader() {
 export default function App() {
   return (
     <Router>
-      <Routes>
-        {/* Base route — NO terminal nav */}
-        <Route path="/" element={<GreetingAnimation />} />
 
-        {/* App routes with layout */}
-        <Route element={<AppLayout />}>
-          <Route
-            path="/home"
-            element={
-              <Suspense fallback={<TerminalLoader />}>
-                <Launchpad />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <Suspense fallback={<TerminalLoader />}>
-                <AboutMe />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/hobbies"
-            element={
-              <Suspense fallback={<TerminalLoader />}>
-                <HobbiesSection />
-              </Suspense>
-            }
-          />
-        </Route>
-      </Routes>
+      <Suspense fallback={<TerminalLoader />}>
+        <Routes>
+          {/* Base route — NO terminal nav */}
+          <Route path="/" Component={GreetingAnimation} />
+          {/* App routes with layout */}
+          <Route element={<AppLayout />}>
+            <Route
+              path="/home"
+              Component={Launchpad}
+            />
+            <Route
+              path="/about"
+              Component={AboutMe}
+            />
+            <Route
+              path="/hobbies"
+              Component={HobbiesSection}
+            />
+          </Route>
+        </Routes>
+      </Suspense>
     </Router>
   );
 }
@@ -97,9 +87,10 @@ export function AppLayout() {
       {/* Scrollable Content */}
       <main
         className="
-          pt-14 md:pt-0
+          p-4
+          md:pt-0
           md:ml-64
-          min-h-screen
+          h-screen
           overflow-y-auto
         "
       >
