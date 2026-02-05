@@ -24,7 +24,7 @@ export const PROJECTS = [
     title: "PitStop",
     description:
       "Clean, fast UI for F1 pitstop analytics and session insights.",
-    demo: "https://quickstop.dracket.art",
+    demo: "https://pitstop.dracket.art",
     repo: "https://github.com/chouhan-abhi/PitStop",
     image:
       "https://raw.githubusercontent.com/chouhan-abhi/PitStop/refs/heads/main/public/ScreenShots/Quickstop_f1_screenshot4.png",
