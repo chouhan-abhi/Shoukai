@@ -2,6 +2,24 @@ import { Music, Camera, Gamepad, BookOpen } from "lucide-react";
 import PhotographySection from "../components/views/Hobbies/PhotographySection";
 
 export const PROJECTS = [
+    {
+    title: "Dracket Crawler",
+    description:
+      "It feeds on information so you dont have to go through rest of the garbage",
+    demo: "https://crawler.dracket.art",
+    repo: "https://github.com/chouhan-abhi/crawler",
+    image:
+      "https://raw.githubusercontent.com/chouhan-abhi/AnimeSkdool/main/public/screenshots/Aniskdool%20ui1.png",
+  },
+  {
+    title: "The Narrator",
+    description:
+      "A script to speech web app. Just give your script and it will narrate its story to you",
+    demo: "https://narrator.dracket.art",
+    repo: "https://github.com/chouhan-abhi/narrator",
+    image:
+      "https://github.com/chouhan-abhi/Narrator/blob/caedad742c450af37e5cbf64d184201e81f96580/public/assets/the-narrator-logo.pngg",
+  },
   {
     title: "AnimeSkdool",
     description:
@@ -46,7 +64,7 @@ export const PROJECTS = [
     repo: "https://github.com/chouhan-abhi/Placen",
     image:
       "https://raw.githubusercontent.com/chouhan-abhi/Placens/main/public/ScreenShot1.png",
-  },
+  }
 ];
 
 
